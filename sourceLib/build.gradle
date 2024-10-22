@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -51,9 +51,11 @@ tasks.register('androidSourcesJar', Jar) {
 publishing {
     publications {
         aar(MavenPublication) {
-            artifactId = "mylib"
+            groupId = 'com.github.lz-woncan'
+            artifactId = "testsdk"
             artifact(tasks["androidSourcesJar"])
             artifact("$buildDir/outputs/aar/sourceLib-release.aar")
         }
     }
 }
+

@@ -21,5 +21,6 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.woncan.sourcelib.PublicAPI{
-*;
+    public <methods>;
+       public <fields>;
 }

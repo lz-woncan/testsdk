@@ -28,6 +28,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -40,22 +51,32 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
 }
 
-tasks.register('androidSourcesJar', Jar) {
-    group("documentation")
-    archiveClassifier = 'sources'
-    def sdkDir = "$projectDir/src/main/java/com/woncan/sourcelib"
-    def publicAPI = ["$sdkDir/PublicAPI.kt"]
-    from publicAPI
-}
 
-publishing {
-    publications {
-        aar(MavenPublication) {
-            groupId = 'com.github.lz-woncan'
-            artifactId = "testsdk"
-            artifact(tasks["androidSourcesJar"])
-            artifact("$buildDir/outputs/aar/sourceLib-release.aar")
+
+//publishing {
+//    publications {
+//        release(MavenPublication) {
+//            groupId = 'com.github.lz-woncan'
+//            artifactId = "testsdk"
+//            version="1.0.0"
+////            artifact("$projectDir/libs/sources.jar")
+////            artifact("$projectDir/libs/classes.jar")
+//            from components.release
+//        }
+//    }
+//}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                artifact("$projectDir/libs/litesurvey-release.aar")
+                artifact("$projectDir/libs/sources.jar")
+                groupId = 'com.woncan.testsdk'
+
+            }
         }
     }
 }
+
 

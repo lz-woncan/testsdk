@@ -72,13 +72,12 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
+//                from components.release
+                groupId = 'com.woncan.testsdk'
                 artifact("$projectDir/libs/sources.jar"){
                     classifier = 'javadoc'
                 }
-                from components.release
-                groupId = 'com.woncan.testsdk'
-
-
+                artifact releaseSourcesJar
             }
         }
     }

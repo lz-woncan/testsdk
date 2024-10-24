@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,7 +36,7 @@ android {
     publishing {
         singleVariant("release") {
             withSourcesJar()
-//            withJavadocJar()
+            withJavadocJar()
         }
     }
 }
@@ -75,11 +75,9 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
                 groupId = 'com.woncan.testsdk'
-                artifact("$projectDir/libs/sources.jar"){
-                    classifier = 'javadoc'
-                }
+                version="1.0.0"
+                from components.release
             }
         }
     }

@@ -36,6 +36,7 @@ android {
     publishing {
         singleVariant("release") {
             withSourcesJar()
+//            withJavadocJar()
         }
     }
 }
@@ -54,30 +55,31 @@ dependencies {
 }
 
 
-
-//publishing {
-//    publications {
-//        release(MavenPublication) {
-//            groupId = 'com.github.lz-woncan'
-//            artifactId = "testsdk"
-//            version="1.0.0"
-////            artifact("$projectDir/libs/sources.jar")
-////            artifact("$projectDir/libs/classes.jar")
-//            from components.release
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                groupId = 'com.github.lz-woncan'
+//                artifactId = "testsdk"
+//                version="1.0.0"
+//            artifact("$projectDir/libs/sources.jar")
+//            artifact("$projectDir/libs/classes.jar")
+////                from components.release
+//            }
 //        }
 //    }
 //}
+
 
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-//                from components.release
+                from components.release
                 groupId = 'com.woncan.testsdk'
                 artifact("$projectDir/libs/sources.jar"){
                     classifier = 'javadoc'
                 }
-                artifact releaseSourcesJar
             }
         }
     }

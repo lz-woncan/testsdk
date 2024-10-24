@@ -36,7 +36,6 @@ android {
     publishing {
         singleVariant("release") {
             withSourcesJar()
-            withJavadocJar()
         }
     }
 }
@@ -73,9 +72,12 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                artifact("$projectDir/libs/sources.jar")
+                artifact("$projectDir/libs/sources.jar"){
+                    classifier = 'javadoc'
+                }
                 from components.release
                 groupId = 'com.woncan.testsdk'
+
 
             }
         }
